@@ -40,4 +40,16 @@ canvas = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('SNAKE GAME')
 
 
+#images for items
+snake_img = pygame.image.load('snake2.png')
+apple_img = pygame.image.load('apple2.png')
+tail_img = pygame.image.load('tail22.png')
+apple_img_rect = apple_img.get_rect()
+
+#music for background,crash and eat
+pygame.mixer.music.load('gamesound23.mp3')
+
+pygame.mixer.music.play(1)
+
+
 
