@@ -107,6 +107,49 @@ def start_game():
 
         pygame.display.update()
 
+ def creator():
+            canvas.fill(BLACK)
+            my_img = pygame.image.load('image2.jpg')
+            my_img_rect = my_img.get_rect()
+            my_img_rect.center = (WINDOW_WIDTH / 2, my_img_rect.height / 2 + 20)
+            canvas.blit(my_img, my_img_rect)
+
+            start_inst1 = large_font.render("Aaditya Narayan Thakur", False, GREEN)
+            start_inst1_rect = start_inst1.get_rect()
+            start_inst1_rect.center = (WINDOW_WIDTH / 2, 420)
+            canvas.blit(start_inst1, start_inst1_rect)
+
+            start_inst2 = small_font.render("Hello Guys,It's myself Aaditya Narayan Thakur.", True, RED)
+            start_inst3 = small_font.render("My student id is 210262.", True, BLUE)
+            start_inst4 = small_font.render("This is a very simple game, developed using by python", True, GREEN)
+            start_inst5 = small_font.render("Thanks for playing ", True, YELLOW)
+
+            canvas.blit(start_inst2, (10, 500))
+            canvas.blit(start_inst3, (10, 530))
+            canvas.blit(start_inst4, (10, 560))
+            canvas.blit(start_inst5, (10, 590))
+
+
+            start_inst5 = medium_font.render("<<BACK", True, RED, YELLOW)
+            start_inst5_rect = start_inst5.get_rect()
+            start_inst5_rect.center = (
+            WINDOW_WIDTH - start_inst5_rect.width / 2, WINDOW_HEIGHT - start_inst5_rect.height / 2)
+            canvas.blit(start_inst5, start_inst5_rect)
+            pygame.display.update()
+
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        x, y = event.pos
+                        if x > start_inst5_rect.left and x < start_inst5_rect.right:
+                            if y > start_inst5_rect.top and y < start_inst5_rect.bottom:
+                                start_game()
+                pygame.display.update()
+
+
 
 
 
