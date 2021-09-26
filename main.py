@@ -217,6 +217,26 @@ def gameover():
                   pygame.display.update()
 
 
+def snake(snakelist, direction):
+
+    if direction == 'right':
+        head = pygame.transform.rotate(snake_img, 270)
+        tail = pygame.transform.rotate(tail_img, 270)
+    if direction == 'left':
+        head = pygame.transform.rotate(snake_img, 90)
+        tail = pygame.transform.rotate(tail_img, 90)
+    if direction == 'up':
+        head = pygame.transform.rotate(snake_img, 0)
+        tail = pygame.transform.rotate(tail_img, 0)
+    if direction == 'down':
+        head = pygame.transform.rotate(snake_img, 180)
+        tail = pygame.transform.rotate(tail_img, 180)
+
+    canvas.blit(head, snakelist[-1])
+    canvas.blit(tail, snakelist[0])
+
+    for XnY in snakelist[1:-1]:
+        pygame.draw.rect(canvas, BLUE, (XnY[0], XnY[1], SNAKE_WIDTH, SNAKE_WIDTH))
 
 
 
