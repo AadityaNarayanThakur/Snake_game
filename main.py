@@ -22,4 +22,9 @@ ad = pygame.image.load("background2.jpg")
 bd = pygame.image.load("back3.jpg")
 bc = pygame.image.load("snakes.jpg")
 
+ad = pygame.transform.scale(ad,(WINDOW_WIDTH,WINDOW_HEIGHT))
+bd= pygame.transform.scale(bd,(WINDOW_WIDTH,WINDOW_HEIGHT))
+bc = pygame.transform.scale(bc,(WINDOW_WIDTH,WINDOW_HEIGHT))
+
+
 
