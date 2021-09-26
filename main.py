@@ -18,5 +18,8 @@ YELLOW = (255, 255, 0)
 WINDOW_WIDTH = 700
 WINDOW_HEIGHT = 700
 # background image
-bgimg = pygame.image.load("background2.jpg")
+ad = pygame.image.load("background2.jpg")
+bd = pygame.image.load("back3.jpg")
+bc = pygame.image.load("snakes.jpg")
+
 
