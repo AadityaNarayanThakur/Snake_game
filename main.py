@@ -179,6 +179,46 @@ def start_inst(start_font1, start_font1_rect):
                         start_game()
           pygame.display.update()
 
+def gameover():
+              # canvas.fill(BLACK)
+
+              font_gameover1 = large_font.render('GAME OVER', True, GREEN)
+              font_gameover2 = medium_font.render("Play Again", True, RED, YELLOW)
+              font_gameover3 = medium_font.render("Quit", True, RED, YELLOW)
+
+              font_gameover1_rect = font_gameover1.get_rect()
+              font_gameover2_rect = font_gameover2.get_rect()
+              font_gameover3_rect = font_gameover3.get_rect()
+
+              font_gameover1_rect.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 100)
+              font_gameover2_rect.center = (WINDOW_WIDTH / 2 + 150, WINDOW_HEIGHT / 2 + 20)
+              font_gameover3_rect.center = (WINDOW_WIDTH / 2 + 150, WINDOW_HEIGHT / 2 + 70)
+
+              canvas.blit(font_gameover1, font_gameover1_rect)
+              canvas.blit(font_gameover2, font_gameover2_rect)
+              canvas.blit(font_gameover3, font_gameover3_rect)
+              pygame.display.update()
+
+              while True:
+                  for event in pygame.event.get():
+                      if event.type == pygame.QUIT:
+                          pygame.quit()
+                          sys.exit()
+                      if event.type == pygame.MOUSEBUTTONDOWN:
+                          x, y = event.pos
+                          if x > font_gameover2_rect.left and x < font_gameover2_rect.right:
+                              if y > font_gameover2_rect.top and y < font_gameover2_rect.bottom:
+                                  gameloop()
+                          if x > font_gameover3_rect.left and x < font_gameover3_rect.right:
+                              if y > font_gameover3_rect.top and y < font_gameover3_rect.bottom:
+                                  pygame.quit()
+                                  sys.exit()
+
+                  pygame.display.update()
+
+
+
+
 
 
 
