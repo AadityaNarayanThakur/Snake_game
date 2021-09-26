@@ -27,4 +27,17 @@ bd= pygame.transform.scale(bd,(WINDOW_WIDTH,WINDOW_HEIGHT))
 bc = pygame.transform.scale(bc,(WINDOW_WIDTH,WINDOW_HEIGHT))
 
 
+VELOCITY = 10
+SNAKE_WIDTH = 15
+APPLE_SIZE = 20
+TOP_WIDTH = 40
+small_font = pygame.font.SysFont('forte', 25)
+medium_font = pygame.font.SysFont('showcard gothic', 30, True)
+large_font = pygame.font.SysFont('chiller', 60, True, True)
+clock = pygame.time.Clock()
+
+canvas = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption('SNAKE GAME')
+
+
 
