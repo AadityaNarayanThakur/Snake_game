@@ -18,7 +18,7 @@ YELLOW = (255, 255, 0)
 WINDOW_WIDTH = 700
 WINDOW_HEIGHT = 700
 # background image
-ad = pygame.image.load("background2.jpg")
+ad = pygame.image.load("Background.jpg")
 bd = pygame.image.load("back3.jpg")
 bc = pygame.image.load("snakes.jpg")
 
@@ -54,10 +54,10 @@ def start_game():
     canvas.fill(BLACK)
     canvas.blit(bc,(0,0))
     start_font1 = large_font.render("Welcome To Snake Game", True,BLUE,RED)
-    start_font2 = medium_font.render("PlAY GAME", True, RED, YELLOW)
-    start_font3 = medium_font.render("RULES", True, RED, YELLOW)
-    start_font4 = medium_font.render("Quit", True, RED, YELLOW)
-    start_font5 = medium_font.render("Creator", True, RED, YELLOW)
+    start_font2 = large_font.render("PlAY GAME", True, RED, YELLOW)
+    start_font3 = large_font.render("RULES", True, RED, YELLOW)
+    start_font4 = large_font.render("Quit", True, RED, YELLOW)
+    start_font5 = large_font.render("Creator", True, RED, YELLOW)
     start_font1_rect = start_font1.get_rect()
     start_font2_rect = start_font2.get_rect()
     start_font3_rect = start_font3.get_rect()
@@ -107,9 +107,9 @@ def start_game():
 
         pygame.display.update()
 
- def creator():
+def creator():
             canvas.fill(BLACK)
-            my_img = pygame.image.load('image2.jpg')
+            my_img = pygame.image.load('imageAa.jpg')
             my_img_rect = my_img.get_rect()
             my_img_rect.center = (WINDOW_WIDTH / 2, my_img_rect.height / 2 + 20)
             canvas.blit(my_img, my_img_rect)
@@ -119,10 +119,10 @@ def start_game():
             start_inst1_rect.center = (WINDOW_WIDTH / 2, 420)
             canvas.blit(start_inst1, start_inst1_rect)
 
-            start_inst2 = small_font.render("Hello Guys,It's myself Aaditya Narayan Thakur.", True, RED)
-            start_inst3 = small_font.render("My student id is 210262.", True, BLUE)
-            start_inst4 = small_font.render("This is a very simple game, developed using by python", True, GREEN)
-            start_inst5 = small_font.render("Thanks for playing ", True, YELLOW)
+            start_inst2 = medium_font.render("Hello Guys,It's myself Aaditya Narayan Thakur.", True, RED)
+            start_inst3 = medium_font.render("My Student Id is 210262.", True, BLUE)
+            start_inst4 = medium_font.render("This is a very simple game, developed using by python", True, GREEN)
+            start_inst5 = medium_font.render("Thanks for playing ", True, YELLOW)
 
             canvas.blit(start_inst2, (10, 500))
             canvas.blit(start_inst3, (10, 530))
@@ -153,10 +153,10 @@ def start_inst(start_font1, start_font1_rect):
       canvas.fill(BLACK)
       canvas.blit(bd, (0, 0))
       canvas.blit(start_font1, start_font1_rect)
-      start_inst1 = small_font.render("--> Do not cross the edges, else you will be dead", True, YELLOW)
-      start_inst2 = small_font.render("--> Keep eating the red apples", True, RED)
-      start_inst3 = small_font.render("--> Do not cross over yourself", True, GREEN)
-      start_inst4 = small_font.render("--> Provide your Feedback......", True, BLUE)
+      start_inst1 = medium_font.render("--> Do not cross the edges, else you will be dead", True, YELLOW)
+      start_inst2 = medium_font.render("--> Keep eating the red apples", True, RED)
+      start_inst3 = medium_font.render("--> Do not cross over yourself", True, GREEN)
+      start_inst4 = medium_font.render("--> Provide your Feedback......", True, BLUE)
       start_inst5 = medium_font.render("<<BACK", True, RED, YELLOW)
       start_inst5_rect = start_inst5.get_rect()
       start_inst5_rect.center = (WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100)
@@ -260,10 +260,113 @@ def game_paused():
                                 return
                 pygame.display.update()
 
+def gameloop():
+
+    while True:
 
 
 
+        LEAD_X = 0
+        LEAD_Y = 100
+        direction = 'right'
+        score = small_font.render("Score:0", True, YELLOW)
+        APPLE_X = random.randrange(0, WINDOW_WIDTH - 10, 10)
+        APPLE_Y = random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10)
+        snakelist = []
+        snakelength = 3
+        pause_font = medium_font.render('II', True, RED)
+
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        if direction == 'right':
+                            pass
+                        else:
+                            direction = 'left'
+                    if event.key == pygame.K_RIGHT:
+                        if direction == 'left':
+                            pass
+                        else:
+                            direction = 'right'
+                    if event.key == pygame.K_UP:
+                        if direction == 'down':
+                            pass
+                        else:
+                            direction = 'up'
+                    if event.key == pygame.K_DOWN:
+                        if direction == 'up':
+                            pass
+                        else:
+                            direction = 'down'
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pause_xy = event.pos
+
+                    if pause_xy[0] > (WINDOW_WIDTH - 50) and pause_xy[0] < WINDOW_WIDTH:
+                        if pause_xy[1] > 0 and pause_xy[1] < 50:
+                            game_paused()
+            if direction == 'up':
+                LEAD_Y -= VELOCITY
+                if LEAD_Y < TOP_WIDTH:
+                    gameover()
+            if direction == 'down':
+                LEAD_Y += VELOCITY
+                if LEAD_Y > WINDOW_HEIGHT - SNAKE_WIDTH:
+                    gameover()
+            if direction == 'right':
+                LEAD_X += VELOCITY
+                if LEAD_X > WINDOW_WIDTH - SNAKE_WIDTH:
+                    gameover()
+            if direction == 'left':
+                LEAD_X -= VELOCITY
+                if LEAD_X < 0:
+                    gameover()
+
+            snakehead = []
+            snakehead.append(LEAD_X)
+            snakehead.append(LEAD_Y)
+            snakelist.append(snakehead)
+
+            snake_head_rect = pygame.Rect(LEAD_X, LEAD_Y, SNAKE_WIDTH, SNAKE_WIDTH)
+            apple_rect = pygame.Rect(APPLE_X, APPLE_Y, APPLE_SIZE, APPLE_SIZE)
+
+
+            if len(snakelist) > snakelength:
+                del snakelist[0]
+            for point in snakelist[:-1]:
+                if point == snakehead:
+                    gameover()
+                    pygame.mixer.music.load('Ding.mp3')
+                    pygame.mixer.music.play()
 
 
 
+            canvas.fill(BLACK)
+            canvas.blit(ad,(0, 0))
 
+            snake(snakelist, direction)
+            if snake_head_rect.colliderect(apple_rect):
+                APPLE_X = random.randrange(0, WINDOW_WIDTH - 10, 10)
+                APPLE_Y = random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10)
+                snakelength += 1
+                pygame.mixer.music.load('Ding.mp3')
+                pygame.mixer.music.play()
+                score = medium_font.render("Score:" + str(snakelength - 3), True, YELLOW)
+
+            canvas.blit(score, (20, 10))
+            pygame.draw.line(canvas, GREEN, (0, TOP_WIDTH), (WINDOW_WIDTH, TOP_WIDTH))
+            pygame.draw.line(canvas, YELLOW, (WINDOW_WIDTH - 60, 0), (WINDOW_WIDTH - 60, TOP_WIDTH))
+            pygame.draw.rect(canvas, YELLOW, (WINDOW_WIDTH - 60, 0, 60, TOP_WIDTH))
+            canvas.blit(pause_font, (WINDOW_WIDTH - 45, 10))
+            canvas.blit(apple_img, (APPLE_X, APPLE_Y))
+            pygame.display.update()
+
+            clock.tick(FPS)
+
+
+start_game()
+gameloop()
