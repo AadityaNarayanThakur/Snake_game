@@ -29,15 +29,16 @@ To add login reuirements.<br>
 To add 2 worlds: Classic snake,Retro snake.<br>
 To add  rewind the snake option.<br>
 
-  **TOOLS AND TECHNOLOGY**
+**TOOLS AND TECHNOLOGY**
+  <p>
+   
   Programming language: Python v 3.9.<br>
   Game library:Pygame in python.<br>
   Code Editior: Pycharm Communitya Editions.<br>
   Verson Control: Git and Github.<br>
+   
+   <p>
   
-   
-   
-
 
 Aaditya Naryan Thakur<br>
 Coventry_Id- 11780283<br>   
