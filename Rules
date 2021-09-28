@@ -1,0 +1,29 @@
+def start_inst(start_font1, start_font1_rect):
+      canvas.fill(BLACK)
+      canvas.blit(bd, (0, 0))
+      canvas.blit(start_font1, start_font1_rect)
+      start_inst1 = medium_font.render("--> Do not cross the edges, else you will be dead", True, YELLOW)
+      start_inst2 = medium_font.render("--> Keep eating the red apples", True, RED)
+      start_inst3 = medium_font.render("--> Do not cross over yourself", True, GREEN)
+      start_inst4 = medium_font.render("--> Provide your Feedback......", True, BLUE)
+      start_inst5 = medium_font.render("<<BACK", True, RED, YELLOW)
+      start_inst5_rect = start_inst5.get_rect()
+      start_inst5_rect.center = (WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100)
+
+      canvas.blit(start_inst1, (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 2))
+      canvas.blit(start_inst2, (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 2 + 30))
+      canvas.blit(start_inst3, (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 2 + 60))
+      canvas.blit(start_inst4, (WINDOW_WIDTH / 8, WINDOW_HEIGHT / 2 + 90))
+      canvas.blit(start_inst5, start_inst5_rect)
+      pygame.display.update()
+      while True:
+          for event in pygame.event.get():
+              if event.type == pygame.QUIT:
+                  pygame.quit()
+                  sys.exit()
+              if event.type == pygame.MOUSEBUTTONDOWN:
+                 x, y = event.pos
+                 if x > start_inst5_rect.left and x < start_inst5_rect.right:
+                    if y > start_inst5_rect.top and y < start_inst5_rect.bottom:
+                        start_game()
+          pygame.display.update()
