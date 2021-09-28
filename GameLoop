@@ -1,0 +1,110 @@
+def gameloop():
+
+    while True:
+
+
+
+        LEAD_X = 0
+        LEAD_Y = 100
+        direction = 'right'
+        score = small_font.render("Score:0", True, YELLOW)
+        APPLE_X = random.randrange(0, WINDOW_WIDTH - 10, 10)
+        APPLE_Y = random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10)
+        snakelist = []
+        snakelength = 3
+        pause_font = medium_font.render('II', True, RED)
+
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        if direction == 'right':
+                            pass
+                        else:
+                            direction = 'left'
+                    if event.key == pygame.K_RIGHT:
+                        if direction == 'left':
+                            pass
+                        else:
+                            direction = 'right'
+                    if event.key == pygame.K_UP:
+                        if direction == 'down':
+                            pass
+                        else:
+                            direction = 'up'
+                    if event.key == pygame.K_DOWN:
+                        if direction == 'up':
+                            pass
+                        else:
+                            direction = 'down'
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pause_xy = event.pos
+
+                    if pause_xy[0] > (WINDOW_WIDTH - 50) and pause_xy[0] < WINDOW_WIDTH:
+                        if pause_xy[1] > 0 and pause_xy[1] < 50:
+                            game_paused()
+            if direction == 'up':
+                LEAD_Y -= VELOCITY
+                if LEAD_Y < TOP_WIDTH:
+                    gameover()
+            if direction == 'down':
+                LEAD_Y += VELOCITY
+                if LEAD_Y > WINDOW_HEIGHT - SNAKE_WIDTH:
+                    gameover()
+            if direction == 'right':
+                LEAD_X += VELOCITY
+                if LEAD_X > WINDOW_WIDTH - SNAKE_WIDTH:
+                    gameover()
+            if direction == 'left':
+                LEAD_X -= VELOCITY
+                if LEAD_X < 0:
+                    gameover()
+
+            snakehead = []
+            snakehead.append(LEAD_X)
+            snakehead.append(LEAD_Y)
+            snakelist.append(snakehead)
+
+            snake_head_rect = pygame.Rect(LEAD_X, LEAD_Y, SNAKE_WIDTH, SNAKE_WIDTH)
+            apple_rect = pygame.Rect(APPLE_X, APPLE_Y, APPLE_SIZE, APPLE_SIZE)
+
+
+            if len(snakelist) > snakelength:
+                del snakelist[0]
+            for point in snakelist[:-1]:
+                if point == snakehead:
+                    gameover()
+                    pygame.mixer.music.load('Ding.mp3')
+                    pygame.mixer.music.play()
+
+
+
+            canvas.fill(BLACK)
+            canvas.blit(ad,(0, 0))
+
+            snake(snakelist, direction)
+            if snake_head_rect.colliderect(apple_rect):
+                APPLE_X = random.randrange(0, WINDOW_WIDTH - 10, 10)
+                APPLE_Y = random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10)
+                snakelength += 1
+                pygame.mixer.music.load('Ding.mp3')
+                pygame.mixer.music.play()
+                score = medium_font.render("Score:" + str(snakelength - 3), True, YELLOW)
+
+            canvas.blit(score, (20, 10))
+            pygame.draw.line(canvas, GREEN, (0, TOP_WIDTH), (WINDOW_WIDTH, TOP_WIDTH))
+            pygame.draw.line(canvas, YELLOW, (WINDOW_WIDTH - 60, 0), (WINDOW_WIDTH - 60, TOP_WIDTH))
+            pygame.draw.rect(canvas, YELLOW, (WINDOW_WIDTH - 60, 0, 60, TOP_WIDTH))
+            canvas.blit(pause_font, (WINDOW_WIDTH - 45, 10))
+            canvas.blit(apple_img, (APPLE_X, APPLE_Y))
+            pygame.display.update()
+
+            clock.tick(FPS)
+
+
+start_game()
+gameloop()
