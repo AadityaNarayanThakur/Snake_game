@@ -1,0 +1,42 @@
+def snake(snakelist, direction):
+
+    if direction == 'right':
+        head = pygame.transform.rotate(snake_img, 270)
+        tail = pygame.transform.rotate(tail_img, 270)
+    if direction == 'left':
+        head = pygame.transform.rotate(snake_img, 90)
+        tail = pygame.transform.rotate(tail_img, 90)
+    if direction == 'up':
+        head = pygame.transform.rotate(snake_img, 0)
+        tail = pygame.transform.rotate(tail_img, 0)
+    if direction == 'down':
+        head = pygame.transform.rotate(snake_img, 180)
+        tail = pygame.transform.rotate(tail_img, 180)
+
+    canvas.blit(head, snakelist[-1])
+    canvas.blit(tail, snakelist[0])
+
+    for XnY in snakelist[1:-1]:
+        pygame.draw.rect(canvas, BLUE, (XnY[0], XnY[1], SNAKE_WIDTH, SNAKE_WIDTH))
+
+def game_paused():
+            # canvas.fill(BLACK)
+            paused_font1 = large_font.render("Game Paused", True, RED)
+            paused_font_rect1 = paused_font1.get_rect()
+            paused_font_rect1.center = (WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2)
+            canvas.blit(paused_font1, paused_font_rect1)
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_q:
+                            pygame.quit()
+                            sys.exit()
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        pause_xy = event.pos
+                        if pause_xy[0] > (WINDOW_WIDTH - 50) and pause_xy[0] < WINDOW_WIDTH:
+                            if pause_xy[1] > 0 and pause_xy[1] < 50:
+                                return
+                pygame.display.update()
